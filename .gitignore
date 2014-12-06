@@ -1,0 +1,14 @@
+# built application files
+build/**
+dist/**
+target/**
+bin/**
+.idea
+.idea/**
+.settings
+.settings/**
+temp
+temp/**
+**.iml
+.project
+.checkstyle

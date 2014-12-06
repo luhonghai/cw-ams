@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<!--
+
+    Configuration file for UrlRewriteFilter
+    http://www.tuckey.org/urlrewrite/
+
+-->
+<urlrewrite>
+    <rule>
+        <from>^/contact-us</from>
+        <to>/contact-us.jsp</to>
+    </rule>
+    <rule>
+        <from>^/login</from>
+        <to>/login.jsp</to>
+    </rule>
+    <rule>
+        <from>^/user/login</from>
+        <to>/user/login.jsp</to>
+    </rule>
+    <rule>
+        <from>^/user/logout</from>
+        <to>/user/logout.jsp</to>
+    </rule>
+    <rule>
+        <from>^/user/create</from>
+        <to>/user/create.jsp</to>
+    </rule>
+    <rule>
+        <from>^/shop</from>
+        <to>/shop.jsp</to>
+    </rule>
+    <rule>
+        <from>^/cart</from>
+        <to>/cart.jsp</to>
+    </rule>
+    <rule>
+        <from>^/checkout</from>
+        <to>/checkout.jsp</to>
+    </rule>
+    <rule>
+        <from>^/product</from>
+        <to>/product-details.jsp</to>
+    </rule>
+</urlrewrite>
+
