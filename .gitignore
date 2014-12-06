@@ -12,3 +12,4 @@ temp/**
 **.iml
 .project
 .checkstyle
+.DS_Store
