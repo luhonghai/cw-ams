@@ -89,6 +89,9 @@ public class UserService extends AbstractService<User> {
     }
 
     public void delete(User user) throws ServiceException {
+        if (user.getUsername().equalsIgnoreCase("admin")) {
+            throw new ServiceException("Could not delete admin account");
+        }
         delete(user.getId());
     }
 

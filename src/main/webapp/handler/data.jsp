@@ -116,9 +116,8 @@
         writer.print(gson.toJson(session.getAttribute("user")));
       }
   } catch (Exception ex) {
-    ex.printStackTrace();
     TableData tData = new TableData();
-    tData.setMessage("Error: " + ex.getMessage());
+    tData.setMessage(ex.getMessage());
     writer.print(gson.toJson(tData));
   }
 

@@ -1,7 +1,7 @@
 package uk.ac.gre.cw.aircraft;
 
 public class Common {
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
 
     public static String DATABASE_JDBC_DRIVER = "db.jdbc.driver";
     public static String DATABASE_URL = "db.url";

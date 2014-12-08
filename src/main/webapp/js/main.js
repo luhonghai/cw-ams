@@ -217,8 +217,8 @@ $( document ).ready(function() {
                             }).done(function( resp ) {
                                 if (typeof resp != 'undefined' && resp.length > 0) {
                                     var data = JSON.parse(resp);
-                                    var message = ""|data.message;
-                                    if (typeof data.message != 'undefined' && data.message=="Completed") {
+                                    var message = data.message;
+                                    if (typeof message != 'undefined' && message=="Completed") {
                                         $rootDataTable.row($target.parents('tr')).remove().draw();
                                         deleteData(tTarget);
                                         swal("Deleted successfully!", "", "success");

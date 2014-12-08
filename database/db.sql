@@ -158,3 +158,7 @@ CREATE TABLE `engineer_job_mapping` (
   PRIMARY KEY (`engineer_job_mapping_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+insert into `user`(`first_name`,`last_name`,`email`,`gender`,`username`,`password`)
+VALUES ('Admin','System','admin@aircraft.com', true,'admin','21232f297a57a5a743894a0e4a801fc3');
+
+

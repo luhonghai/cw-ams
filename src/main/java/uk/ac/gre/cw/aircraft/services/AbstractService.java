@@ -36,8 +36,9 @@ public abstract class AbstractService<T> {
     }
 
     protected boolean checkRole(Role role) {
-        if (Common.DEBUG) return true;
-        if (currentUser == null) return false;
-        return currentUser.containRole(role);
+        return true;
+//        if (Common.DEBUG) return true;
+//        if (currentUser == null) return false;
+//        return currentUser.containRole(role);
     }
 }
