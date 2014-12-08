@@ -13,3 +13,4 @@ temp/**
 .project
 .checkstyle
 .DS_Store
+src/main/resources/system.properties

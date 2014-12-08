@@ -10,40 +10,48 @@
 -->
 <urlrewrite>
     <rule>
-        <from>^/contact-us</from>
-        <to>/contact-us.jsp</to>
-    </rule>
-    <rule>
-        <from>^/login</from>
+        <from>^/login$</from>
         <to>/login.jsp</to>
     </rule>
     <rule>
-        <from>^/user/login</from>
-        <to>/user/login.jsp</to>
+        <from>^/qualification$</from>
+        <to>/qualification.jsp</to>
     </rule>
     <rule>
-        <from>^/user/logout</from>
-        <to>/user/logout.jsp</to>
+        <from>^/404$</from>
+        <to>/404.jsp</to>
     </rule>
     <rule>
-        <from>^/user/create</from>
-        <to>/user/create.jsp</to>
+        <from>^/job$</from>
+        <to>/job.jsp</to>
     </rule>
     <rule>
-        <from>^/shop</from>
-        <to>/shop.jsp</to>
+        <from>^/user-profile$</from>
+        <to>/user-profile.jsp</to>
     </rule>
     <rule>
-        <from>^/cart</from>
-        <to>/cart.jsp</to>
+        <from>^/user$</from>
+        <to>/user.jsp</to>
     </rule>
     <rule>
-        <from>^/checkout</from>
-        <to>/checkout.jsp</to>
+        <from>^/engineer-job-mapping$</from>
+        <to>/engineer-job-mapping.jsp</to>
     </rule>
     <rule>
-        <from>^/product</from>
-        <to>/product-details.jsp</to>
+        <from>^/engineer-qualification-mapping$</from>
+        <to>/engineer-qualification-mapping.jsp</to>
+    </rule>
+    <rule>
+        <from>^/handler/data$</from>
+        <to>/handler/data.jsp</to>
+    </rule>
+    <rule>
+        <from>^/handler/login$</from>
+        <to>/handler/login.jsp</to>
+    </rule>
+    <rule>
+        <from>^/handler/logout$</from>
+        <to>/handler/logout.jsp</to>
     </rule>
 </urlrewrite>
 

@@ -1,10 +1,12 @@
 package uk.ac.gre.cw.aircraft;
 
-/**
- * Created by Long Nguyen on 12/4/14.
- */
 public class Common {
+    public static boolean DEBUG = true;
 
-    public static final String PERSISTENCE_UNIT = "DPU";
+    public static String DATABASE_JDBC_DRIVER = "db.jdbc.driver";
+    public static String DATABASE_URL = "db.url";
+    public static String DATABASE_USER = "db.user";
+    public static String DATABASE_PASSWORD = "db.password";
 
+    public static String DATE_FORMAT = "date.format";
 }

@@ -3,9 +3,6 @@ package uk.ac.gre.cw.aircraft.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by Long Nguyen on 12/4/14.
- */
 public class MD5Helper {
 
     public static String md5(String input) {
