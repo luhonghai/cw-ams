@@ -133,7 +133,7 @@ public class QualificationDaoImpl extends AbstractDAO<Qualification, Integer> im
             statement.setInt(1, user.getId());
             rs = statement.executeQuery();
             if (rs.next()) {
-                Collection<Qualification> qualifications = new ArrayList<>();
+                Collection<Qualification> qualifications = new ArrayList<Qualification>();
                 do {
                     qualifications.add(resultSetToQualification(rs));
                 } while (rs.next());
@@ -141,6 +141,20 @@ public class QualificationDaoImpl extends AbstractDAO<Qualification, Integer> im
             }
         } catch (SQLException e) {
             throw new DAOException("Could find all qualification of user id " + user.getId(),e);
+        } finally {
+            close();
+        }
+    }
+
+    @Override
+    public void removeAllMappingEngineer(int qualificationId) throws DAOException {
+        try {
+            open();
+            statement = conn.prepareStatement(getQuery("delete_all_qualification_engineer_mapping"));
+            statement.setInt(1, qualificationId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Could not delete all engineer mapping " + qualificationId,e);
         } finally {
             close();
         }

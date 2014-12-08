@@ -53,5 +53,9 @@
         <from>^/handler/logout$</from>
         <to>/handler/logout.jsp</to>
     </rule>
+    <rule>
+        <from>^/handler/mapping$</from>
+        <to>/handler/mapping.jsp</to>
+    </rule>
 </urlrewrite>
 

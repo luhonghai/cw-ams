@@ -8,14 +8,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<%=request.getContextPath()%>">Aircraft v.1</a>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>">Aircraft v1.0</a>
     </div>
     <!-- /.navbar-header -->
 
     <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown">
-
-
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
@@ -47,40 +45,17 @@
                     </div>
                     <!-- /input-group -->
                 </li>
-
-
                 <li>
-                    <a href="#"><i class="fa fa-wrench fa-fw"></i> User management <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="user">List Engineer(s)</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
+                    <a href="<%=request.getContextPath()%>/"><i class="fa fa-home fa-fw"></i> Home <span class="fa arrow"></span></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-wrench fa-fw"></i> Jobs <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="job">List All Jobs</a>
-                        </li>
-                        <li>
-                            <a href="engineer-job-mapping">Engineer-Job Mapping</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
+                    <a href="<%=request.getContextPath()%>/user"><i class="fa fa-users fa-fw"></i> Engineers <span class="fa arrow"></span></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Qualifications <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="qualification"> List all Qualifications</a>
-                        </li>
-                        <li>
-                            <a href="engineer-qualification-mapping">Engineer-Qualification Mapping</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
+                    <a href="<%=request.getContextPath()%>/job"><i class="fa fa-wrench fa-fw"></i> Jobs <span class="fa arrow"></span></a>
+                </li>
+                <li>
+                    <a href="<%=request.getContextPath()%>/qualification"><i class="fa fa-sitemap fa-fw"></i> Qualifications <span class="fa arrow"></span></a>
                 </li>
 
             </ul>

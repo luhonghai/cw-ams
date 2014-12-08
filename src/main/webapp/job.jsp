@@ -68,7 +68,13 @@
                   </select>
                 </div>
               </div>
-
+              <div class="form-group">
+                <label for="selEngineer" class="col-sm-2 control-label">Engineers</label>
+                <div class="col-xs-4">
+                  <select id="selEngineer" multiple="multiple" type="job-engineer">
+                  </select>
+                </div>
+              </div>
             </form>
           </div>
           <div class="modal-footer">

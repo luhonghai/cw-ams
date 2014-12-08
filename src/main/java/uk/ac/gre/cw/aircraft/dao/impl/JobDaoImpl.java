@@ -23,7 +23,7 @@ public class JobDaoImpl extends AbstractDAO<Job,Integer> implements IJobDAO<Job,
             statement = conn.prepareStatement(getQuery("find_all_jobs"));
             rs = statement.executeQuery();
             if (rs.next()) {
-                Collection<Job> jobs = new ArrayList<>();
+                Collection<Job> jobs = new ArrayList<Job>();
                 do {
                     jobs.add(resultSetToJob(rs));
                 } while (rs.next());
@@ -206,7 +206,7 @@ public class JobDaoImpl extends AbstractDAO<Job,Integer> implements IJobDAO<Job,
             statement.setInt(1, user.getId());
             rs = statement.executeQuery();
             if (rs.next()) {
-                Collection<Job> jobs = new ArrayList<>();
+                Collection<Job> jobs = new ArrayList<Job>();
                 do {
                     jobs.add(resultSetToJob(rs));
                 } while (rs.next());
@@ -214,6 +214,20 @@ public class JobDaoImpl extends AbstractDAO<Job,Integer> implements IJobDAO<Job,
             }
         } catch (SQLException e) {
             throw new DAOException("Could not find all jobs of engineer id " + user.getId(), e);
+        } finally {
+            close();
+        }
+    }
+
+    @Override
+    public void removeAllMappingEngineer(int jobId) throws DAOException {
+        try {
+            open();
+            statement = conn.prepareStatement(getQuery("delete_all_job_engineer_mapping"));
+            statement.setInt(1, jobId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Could not delete all engineer mapping " + jobId,e);
         } finally {
             close();
         }

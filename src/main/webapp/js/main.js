@@ -21,12 +21,21 @@ $( document ).ready(function() {
     function getFormData() {
         $('#txtId').removeAttr('disabled');
         if (tableTarget == 'qualification') {
+            var engineerMapping = [];
+            $("#selEngineer option:selected").each(function() {
+                engineerMapping.push({"id" : $(this).val()});
+            });
             return {
                 "id" : $("#txtId").val(),
                 "name" : $("#txtName").val(),
-                "description" : $("#txtDescription").val()
+                "description" : $("#txtDescription").val(),
+                "engineerMapping" : engineerMapping
             }
         } else if (tableTarget == 'job') {
+            var engineerMapping = [];
+            $("#selEngineer option:selected").each(function() {
+                engineerMapping.push({"id" : $(this).val()});
+            });
             return {
                 "id" : $("#txtId").val(),
                 "name": $("#txtName").val(),
@@ -40,7 +49,8 @@ $( document ).ready(function() {
                 },
                 "priority" : {
                     "id" : $("#selPriority").val()
-                }
+                },
+                "engineerMapping" : engineerMapping
             }
         } else if (tableTarget == 'user') {
             return {
@@ -230,6 +240,7 @@ $( document ).ready(function() {
                 $('#txtId').removeAttr('disabled');
                 $('#txtId').val(tTarget);
                 setupFormData(getDataById(tTarget));
+                showMapping(tTarget, $("#selEngineer"));
                 $('#txtId').attr('disabled','disabled');
                 $('#dataModelID').show();
             }
@@ -238,6 +249,7 @@ $( document ).ready(function() {
             $form.attr("act", "create");
             $("#dataModelTitle").html("Add new " + $("#dataModelTitle").attr("target"));
             $('#dataModelID').hide();
+            showMapping(0, $("#selEngineer"));
             clearFormData();
         } else if ($target.hasClass("dataModelSave")) {
             var $form = $("#dataModelForm");
@@ -349,4 +361,51 @@ $( document ).ready(function() {
             }
         });
     });
+
+    function showMapping(id, $selMapping) {
+        if ($selMapping.length > 0) {
+            var type = $selMapping.attr('type');
+            $.ajax({
+                type: "POST",
+                url: app.contextPath + "handler/mapping",
+                data: {
+                    mapping: type,
+                    act: "list",
+                    id : id
+                }
+            }).done(function( resp ) {
+                if (typeof resp != 'undefined' && resp.length > 0)
+                {
+                    var data = JSON.parse(resp);
+                    if (typeof data.message != 'undefined' && data.message == 'Completed') {
+                        if (typeof data.mappings != 'undefined' && data.mappings.length > 0) {
+                            var options = [];
+                            var i;
+                            for (i = 0; i < data.mappings.length; i ++) {
+                                var m = data.mappings[i];
+                                options.push('<option value="' + m.id +  '" ');
+                                if (m.mapped) {
+                                    options.push('selected="selected"');
+                                }
+                                options.push('>')
+                                options.push(m.name);
+                                options.push('</option>');
+                            }
+                        }
+                        $selMapping.html(options.join(""));
+                        $selMapping.multiselect("rebuild");
+                        $selMapping.multiselect({
+                            enableFiltering:true
+                        });
+                    } else {
+                        swal("Error!", "Could not load mapping", "warning");
+                    }
+                } else {
+                    swal("Error!", "Could not load mapping", "warning");
+                }
+            });
+
+        }
+    }
+
 });

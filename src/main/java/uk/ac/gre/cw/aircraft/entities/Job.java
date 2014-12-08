@@ -1,5 +1,6 @@
 package uk.ac.gre.cw.aircraft.entities;
 
+import uk.ac.gre.cw.aircraft.hanlder.MappingData;
 import uk.ac.gre.cw.aircraft.utils.Utilities;
 
 import java.util.Collection;
@@ -112,4 +113,13 @@ public class Job implements PrettyJson {
         this.strCreatedDate = strCreatedDate;
     }
 
+    private Collection<MappingData.Mapping> engineerMapping;
+
+    public Collection<MappingData.Mapping> getEngineerMapping() {
+        return engineerMapping;
+    }
+
+    public void setEngineerMapping(Collection<MappingData.Mapping> engineerMapping) {
+        this.engineerMapping = engineerMapping;
+    }
 }

@@ -17,4 +17,6 @@
 <!-- Custom Theme JavaScript -->
 <script src="js/sb-admin-2.js"></script>
 
+<script src="js/bootstrap-multiselect.js"></script>
+
 <script src="js/main.js"></script>

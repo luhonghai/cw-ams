@@ -1,7 +1,9 @@
 package uk.ac.gre.cw.aircraft.entities;
 
+import uk.ac.gre.cw.aircraft.hanlder.MappingData;
 import uk.ac.gre.cw.aircraft.utils.Utilities;
 
+import java.util.Collection;
 import java.util.Date;
 
 public class Qualification implements PrettyJson {
@@ -10,6 +12,8 @@ public class Qualification implements PrettyJson {
     private String name;
     private String description;
     private Date createdDate;
+
+
 
     public int getId() {
         return id;
@@ -56,5 +60,18 @@ public class Qualification implements PrettyJson {
 
     public void setStrCreatedDate(String strCreatedDate) {
         this.strCreatedDate = strCreatedDate;
+    }
+
+    /**
+     *  For mapping JSON data
+     */
+    private Collection<MappingData.Mapping> engineerMapping;
+
+    public Collection<MappingData.Mapping> getEngineerMapping() {
+        return engineerMapping;
+    }
+
+    public void setEngineerMapping(Collection<MappingData.Mapping> engineerMapping) {
+        this.engineerMapping = engineerMapping;
     }
 }
