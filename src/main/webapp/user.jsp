@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:main pageTitle="User management">
+<t:main pageTitle="User management" requireAdminRole="true">
   <div>
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary table-add-new" data-toggle="modal" data-target="#dataModal">
@@ -62,6 +62,15 @@
                 <label for="txtPassword" class="col-sm-2 control-label">Password</label>
                 <div class="col-xs-4">
                   <input type="password" class="form-control" id="txtPassword">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="selRoles" class="col-sm-2 control-label">Roles</label>
+                <div class="col-xs-4">
+                  <select id="selRoles" multiple="multiple">
+                    <option value="1">Administrator</option>
+                    <option value="2">Engineer</option>
+                  </select>
                 </div>
               </div>
             </form>

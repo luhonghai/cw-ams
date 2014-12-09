@@ -1,4 +1,10 @@
+<%@ tag import="uk.ac.gre.cw.aircraft.entities.User" %>
+<%@ tag import="uk.ac.gre.cw.aircraft.services.UserService" %>
+<%@ tag import="uk.ac.gre.cw.aircraft.entities.Role" %>
 <%@tag pageEncoding="UTF-8" %>
+<%
+    User currentUser = UserService.getCurrentUser(session);
+%>
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
@@ -48,6 +54,7 @@
                 <li>
                     <a href="<%=request.getContextPath()%>/"><i class="fa fa-home fa-fw"></i> Home <span class="fa arrow"></span></a>
                 </li>
+                <% if (currentUser != null && currentUser.containRole(Role.ADMINISTRATOR)) {%>
                 <li>
                     <a href="<%=request.getContextPath()%>/user"><i class="fa fa-users fa-fw"></i> Engineers <span class="fa arrow"></span></a>
                 </li>
@@ -57,7 +64,7 @@
                 <li>
                     <a href="<%=request.getContextPath()%>/qualification"><i class="fa fa-sitemap fa-fw"></i> Qualifications <span class="fa arrow"></span></a>
                 </li>
-
+                <%}%>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

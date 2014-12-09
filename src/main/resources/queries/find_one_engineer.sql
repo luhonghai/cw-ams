@@ -1,0 +1,1 @@
+select * from engineer where user_id=? and deleted=FALSE;

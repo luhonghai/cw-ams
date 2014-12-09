@@ -1,14 +1,24 @@
 <%@ tag import="uk.ac.gre.cw.aircraft.entities.User" %>
 <%@ tag import="uk.ac.gre.cw.aircraft.Common" %>
+<%@ tag import="uk.ac.gre.cw.aircraft.services.UserService" %>
+<%@ tag import="uk.ac.gre.cw.aircraft.entities.Role" %>
 <%@tag description="Main screen" pageEncoding="UTF-8" %>
 <%@taglib prefix="include" tagdir="/WEB-INF/tags/includes" %>
 <%@attribute name="pageTitle" required="true" %>
+<%@attribute name="requireAdminRole" %>
 <%
-    Object loginUser = session.getAttribute("user");
-    if (Common.DEBUG || (loginUser != null && loginUser instanceof User)) {
-
-    } else {
-        response.sendRedirect(request.getContextPath() + "/login");
+    try {
+        User currentUser = UserService.getCurrentUser(session);
+        if (Common.DEBUG || currentUser != null) {
+            if (requireAdminRole != null && requireAdminRole.equalsIgnoreCase("true") && !currentUser.containRole(Role.ADMINISTRATOR)) {
+                response.sendRedirect(request.getContextPath() + "/");
+            }
+        } else {
+            response.sendRedirect(request.getContextPath() + "/login");
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        response.sendRedirect(request.getContextPath() + "/");
     }
 %>
 <!DOCTYPE html>

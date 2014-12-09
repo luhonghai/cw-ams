@@ -199,7 +199,7 @@ public class JobDaoImpl extends AbstractDAO<Job,Integer> implements IJobDAO<Job,
     }
 
     @Override
-    public void findJobs(final Engineer user) throws DAOException {
+    public Collection<Job> findJobs(final Engineer user) throws DAOException {
         try {
             open();
             statement = conn.prepareStatement(getQuery("find_engineer_jobs"));
@@ -211,12 +211,14 @@ public class JobDaoImpl extends AbstractDAO<Job,Integer> implements IJobDAO<Job,
                     jobs.add(resultSetToJob(rs));
                 } while (rs.next());
                 user.setJobs(jobs);
+                return jobs;
             }
         } catch (SQLException e) {
             throw new DAOException("Could not find all jobs of engineer id " + user.getId(), e);
         } finally {
             close();
         }
+        return null;
     }
 
     @Override

@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="include" tagdir="/WEB-INF/tags/includes" %>
-<t:main pageTitle="Job management">
+<t:main pageTitle="Job management" requireAdminRole="true">
   <div>
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary table-add-new" data-toggle="modal" data-target="#dataModal">

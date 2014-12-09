@@ -252,4 +252,18 @@ public class UserDaoImpl extends AbstractDAO<User,Integer> implements IUserDAO<U
         }
     }
 
+    @Override
+    public boolean removeAllRoleMapping(User user) throws DAOException {
+        try {
+            open();
+            statement = conn.prepareStatement(getQuery("delete_all_user_role_mapping"));
+            statement.setInt(1, user.getId());
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new DAOException("Could not remove all mapping role of  user id " + user.getId(),e);
+        } finally {
+            close();
+        }
+    }
+
 }

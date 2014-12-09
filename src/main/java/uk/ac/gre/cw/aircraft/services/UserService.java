@@ -12,6 +12,7 @@ import uk.ac.gre.cw.aircraft.entities.*;
 import uk.ac.gre.cw.aircraft.hanlder.MappingData;
 import uk.ac.gre.cw.aircraft.utils.MD5Helper;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Level;
@@ -37,6 +38,9 @@ public class UserService extends AbstractService<User> {
                     user.setPassword(MD5Helper.md5(user.getPassword()));
                 }
                 userDAO.update(user);
+                if (!getOption().equalsIgnoreCase(OPTION_PROFILE)) {
+                    mappingRole(user);
+                }
                 updateMapping(user);
                 return userDAO.findOne(user.getId());
             } catch (DAOException e) {
@@ -47,26 +51,45 @@ public class UserService extends AbstractService<User> {
             throw new ServiceException("Require Administrator role");
         }
     }
-
+    @Deprecated
     public void updateMapping(User user) throws ServiceException {
+    }
+
+    public void mappingRole(User user) throws ServiceException {
+        Gson gson = new Gson();
+        IUserDAO<User, Integer> userDAO = new UserDaoImpl();
+        try {
+            userDAO.removeAllRoleMapping(user);
+            Collection<Role> roles = user.getRoles();
+            if (roles != null && roles.size() > 0) {
+                for (Role role : roles) {
+                    userDAO.mapRole(user, role);
+                }
+            }
+            // Never let root admin user lose his permission
+            if (!user.containRole(Role.ADMINISTRATOR) && user.getUsername().equalsIgnoreCase("admin")) {
+                userDAO.mapRole(user, Role.ADMINISTRATOR);
+            }
+            if (user.containRole(Role.ENGINEER)) {
+                IEngineerDAO engineerDAO = new EngineerDaoImpl();
+                Engineer engineer =gson.fromJson(gson.toJson(user),Engineer.class);
+                engineer.setAvailable(true);
+                engineerDAO.createEngineer(engineer);
+            }
+        } catch (DAOException e) {
+            throw new ServiceException("Could not mapping role user id " + user.getId(), e);
+        }
 
     }
 
     public User create(User user) throws ServiceException {
         if (checkRole(Role.ADMINISTRATOR)) {
-            Gson gson = new Gson();
             IUserDAO<User, Integer> userDAO = new UserDaoImpl();
             user.setPassword(MD5Helper.md5(user.getPassword()));
             try {
                 user = userDAO.create(user);
-                userDAO.mapRole(user, Role.ENGINEER);
+                mappingRole(user);
                 user = userDAO.findOne(user.getId());
-                if (user.containRole(Role.ENGINEER)) {
-                    IEngineerDAO engineerDAO = new EngineerDaoImpl();
-                    Engineer engineer =gson.fromJson(gson.toJson(user),Engineer.class);
-                    engineer.setAvailable(true);
-                    engineerDAO.createEngineer(engineer);
-                }
                 updateMapping(user);
                 return user;
             } catch (DAOException e) {
@@ -241,7 +264,7 @@ public class UserService extends AbstractService<User> {
             Collection<MappingData.Mapping> mappings = new ArrayList<MappingData.Mapping>();
             if (users != null && users.size() > 0) {
                 for (User user : users) {
-                    if (data != null && data.isContainMapping(user.getId())) {
+                    if (data != null && data.isContainMapping(user.getId()) && user.containRole(Role.ENGINEER)) {
                         mappings.add(new MappingData.Mapping(user.getId(),
                                 user.getFirstName() + " " + user.getLastName() + " (" + user.getUsername() + ")", true));
                     } else {
@@ -255,5 +278,13 @@ public class UserService extends AbstractService<User> {
         } catch (DAOException e) {
             throw new ServiceException("Could not found mapping job-engineer", e);
         }
+    }
+
+    public static User getCurrentUser(HttpSession session) {
+        Object userObj = session.getAttribute("user");
+        if (userObj != null && userObj instanceof User) {
+            return (User) userObj;
+        }
+        return null;
     }
 }

@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:main pageTitle="Qualification management">
+<t:main pageTitle="Qualification management" requireAdminRole="true">
   <div>
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary table-add-new" data-toggle="modal" data-target="#dataModal">

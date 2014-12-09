@@ -7,14 +7,26 @@ import uk.ac.gre.cw.aircraft.dao.exception.DAOException;
 import uk.ac.gre.cw.aircraft.dao.impl.EngineerDaoImpl;
 import uk.ac.gre.cw.aircraft.dao.impl.JobDaoImpl;
 import uk.ac.gre.cw.aircraft.dao.impl.QualificationDaoImpl;
+import uk.ac.gre.cw.aircraft.entities.Engineer;
 import uk.ac.gre.cw.aircraft.entities.Job;
 import uk.ac.gre.cw.aircraft.entities.Qualification;
+import uk.ac.gre.cw.aircraft.entities.User;
 import uk.ac.gre.cw.aircraft.hanlder.MappingData;
 
 import java.util.Collection;
 import java.util.logging.Level;
 
 public class JobService extends AbstractService<Job> {
+
+    public Collection<Job> findByEngineer(Engineer user) throws ServiceException {
+        IJobDAO<Job,Integer> jobDAO = new JobDaoImpl();
+        try {
+            return jobDAO.findJobs(user);
+        } catch (DAOException e) {
+            logger.log(Level.SEVERE, "Could not find jobs of engineer " + user.getId(), e);
+            throw new ServiceException("Could not find jobs of engineer " + user.getId());
+        }
+    }
 
     public Collection<Job> findAll() throws ServiceException {
         IJobDAO<Job,Integer> jobDAO = new JobDaoImpl();

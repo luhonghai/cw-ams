@@ -13,8 +13,6 @@ public interface IEngineerDAO {
 
     public boolean createEngineer(Engineer user) throws DAOException;
 
-
-
     public boolean removeAllMappingQualification(int userId) throws DAOException;
 
     public boolean unmapQualification(Engineer user, Qualification qualification) throws DAOException;

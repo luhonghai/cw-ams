@@ -1,5 +1,6 @@
 package uk.ac.gre.cw.aircraft.dao.impl;
 
+import uk.ac.gre.cw.aircraft.dao.DatabaseConnector;
 import uk.ac.gre.cw.aircraft.dao.IEngineerDAO;
 import uk.ac.gre.cw.aircraft.dao.exception.DAOException;
 import uk.ac.gre.cw.aircraft.entities.Engineer;
@@ -8,6 +9,9 @@ import uk.ac.gre.cw.aircraft.entities.Qualification;
 import uk.ac.gre.cw.aircraft.entities.User;
 import uk.ac.gre.cw.aircraft.hanlder.MappingData;
 
+import javax.xml.transform.Result;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,15 +21,25 @@ public class EngineerDaoImpl extends UserDaoImpl implements IEngineerDAO {
 
     @Override
     public boolean createEngineer(Engineer engineer) throws DAOException {
+        PreparedStatement stm = null;
+        ResultSet resultSet = null;
         try {
             open();
-            statement = conn.prepareStatement(getQuery("create_engineer"));
-            statement.setInt(1, engineer.getId());
-            statement.setBoolean(2, engineer.isAvailable());
-            return statement.executeUpdate() > 0;
+            stm = conn.prepareStatement(getQuery("find_one_engineer"));
+            stm.setInt(1, engineer.getId());
+            resultSet = stm.executeQuery();
+            if (!resultSet.next()) {
+                statement = conn.prepareStatement(getQuery("create_engineer"));
+                statement.setInt(1, engineer.getId());
+                statement.setBoolean(2, engineer.isAvailable());
+                return statement.executeUpdate() > 0;
+            } else {
+                return true;
+            }
         } catch (SQLException e) {
             throw new DAOException("Could not create engineer id " + engineer.getId(),e);
         } finally {
+            DatabaseConnector.close(null, stm, resultSet);
             close();
         }
     }

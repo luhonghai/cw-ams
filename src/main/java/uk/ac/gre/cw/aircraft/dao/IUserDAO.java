@@ -18,4 +18,6 @@ public interface IUserDAO<User,Integer> extends IDAO<User,Integer> {
     public boolean mapRole(User user, Role role) throws DAOException;
 
     public boolean unmapRole(User user, Role role) throws DAOException;
+
+    public boolean removeAllRoleMapping(User user) throws DAOException;
 }

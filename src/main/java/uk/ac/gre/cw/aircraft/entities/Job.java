@@ -67,6 +67,7 @@ public class Job implements PrettyJson {
     }
 
     public Priority getPriority() {
+        if (priority == null) priority = new Priority();
         return priority;
     }
 

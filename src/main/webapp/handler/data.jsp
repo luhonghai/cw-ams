@@ -104,9 +104,12 @@
           user = (User) service.create(user);
           tableData.setObject(user);
         } else if (type.equalsIgnoreCase("update")) {
-          user = (User) service.update(user);
-          if (option != null && option.length() > 0 && option.equalsIgnoreCase("profile")) {
+          if (option != null && option.length() > 0 && option.equalsIgnoreCase(AbstractService.OPTION_PROFILE)) {
+            service.setOption(option);
+            user = (User) service.update(user);
             session.setAttribute("user", user);
+          } else {
+            user = (User) service.update(user);
           }
           tableData.setObject(user);
         }
@@ -116,6 +119,7 @@
         writer.print(gson.toJson(session.getAttribute("user")));
       }
   } catch (Exception ex) {
+    ex.printStackTrace();
     TableData tData = new TableData();
     tData.setMessage(ex.getMessage());
     writer.print(gson.toJson(tData));

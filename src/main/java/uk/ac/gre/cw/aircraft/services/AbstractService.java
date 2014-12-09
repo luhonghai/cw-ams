@@ -11,7 +11,11 @@ import java.util.logging.Logger;
 public abstract class AbstractService<T> {
     protected Logger logger = Logger.getLogger(this.getClass().getName());
 
+    public static final String OPTION_PROFILE = "profile";
+
     private User currentUser;
+
+    private String option;
 
     public AbstractService() {
 
@@ -40,5 +44,14 @@ public abstract class AbstractService<T> {
 //        if (Common.DEBUG) return true;
 //        if (currentUser == null) return false;
 //        return currentUser.containRole(role);
+    }
+
+    public String getOption() {
+        if (option == null) return "";
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
     }
 }

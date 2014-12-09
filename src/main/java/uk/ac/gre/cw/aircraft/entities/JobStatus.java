@@ -29,4 +29,5 @@ public class JobStatus {
     public void setLevel(float level) {
         this.level = level;
     }
+
 }

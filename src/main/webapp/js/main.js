@@ -53,6 +53,12 @@ $( document ).ready(function() {
                 "engineerMapping" : engineerMapping
             }
         } else if (tableTarget == 'user') {
+            var roles = [];
+            if ($("#selRoles").length) {
+                $("#selRoles option:selected").each(function () {
+                    roles.push({"id": $(this).val(), "name" : $(this).text()});
+                });
+            }
             return {
                 "id" : $("#txtId").val(),
                 "firstName" : $("#txtFirstname").val(),
@@ -60,7 +66,8 @@ $( document ).ready(function() {
                 "email" : $("#txtEmail").val(),
                 "password" : $("#txtPassword").val(),
                 "username" : $("#txtUsername").val(),
-                "gender" : $("#rdMale").is(":checked")
+                "gender" : $("#rdMale").is(":checked"),
+                "roles" : roles
             }
         }
     }
@@ -88,6 +95,45 @@ $( document ).ready(function() {
             $("#txtEmail").val(data.email);
             $("#txtUsername").val(data.username);
             $(data.gender ? "#rdMale" : "#rdFemale").attr("checked", "checked");
+
+            var $selRoles = $("#selRoles");
+            if ($selRoles.length) {
+                var options = [];
+                var defaultRoles = [
+                    {
+                        "id" : 1,
+                        "name": "Administrator"
+                    },
+                    {
+                        "id" : 2,
+                        "name" : "Engineer"
+                    }
+                ];
+                var i,j;
+                for (i = 0; i < defaultRoles.length; i++) {
+                    var isExist = false;
+                    if (typeof data.roles != 'undefined' && data.roles.length > 0) {
+                        for (j = 0; j < data.roles.length; j++) {
+                            if (data.roles[j].id == defaultRoles[i].id) {
+                                isExist = true;
+                                break;
+                            }
+                        }
+                    }
+                    options.push('<option value="' + defaultRoles[i].id + '" ');
+                    if (isExist) {
+                        options.push('selected="selected"');
+                    }
+                    options.push('>')
+                    options.push(defaultRoles[i].name);
+                    options.push('</option>');
+                }
+                $selRoles.html(options.join(""));
+                $selRoles.multiselect("rebuild");
+                $selRoles.multiselect({
+                    enableFiltering: true
+                });
+            }
         }
     }
 
@@ -107,6 +153,36 @@ $( document ).ready(function() {
             $("#txtUsername").val("");
             $("#txtPassword").val("");
             $("#rdMale").attr("checked", "checked");
+
+            var $selRoles = $("#selRoles");
+            if ($selRoles.length) {
+                var options = [];
+                var defaultRoles = [
+                    {
+                        "id" : 1,
+                        "name": "Administrator"
+                    },
+                    {
+                        "id" : 2,
+                        "name" : "Engineer"
+                    }
+                ];
+                var i;
+                for (i = 0; i < defaultRoles.length; i++) {
+                    options.push('<option value="' + defaultRoles[i].id + '" ');
+                    if (defaultRoles[i].id == 2) {
+                        options.push('selected="selected"');
+                    }
+                    options.push('>')
+                    options.push(defaultRoles[i].name);
+                    options.push('</option>');
+                }
+                $selRoles.html(options.join(""));
+                $selRoles.multiselect("rebuild");
+                $selRoles.multiselect({
+                    enableFiltering: true
+                });
+            }
         }
     }
 

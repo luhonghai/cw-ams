@@ -23,7 +23,6 @@ public class MD5Helper {
             sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
         }
 
-
         //convert the byte to hex format method 2
         StringBuffer hexString = new StringBuffer();
         for (int i=0;i<byteData.length;i++) {
