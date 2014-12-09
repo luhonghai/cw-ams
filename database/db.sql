@@ -160,5 +160,5 @@ CREATE TABLE `engineer_job_mapping` (
 
 insert into `user`(`first_name`,`last_name`,`email`,`gender`,`username`,`password`)
 VALUES ('Admin','System','admin@aircraft.com', true,'admin','21232f297a57a5a743894a0e4a801fc3');
-
+insert into `user_role_mapping`(`user_id`, `role_id`) VALUES (1,1);
 

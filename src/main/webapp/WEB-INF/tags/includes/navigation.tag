@@ -56,7 +56,7 @@
                 </li>
                 <% if (currentUser != null && currentUser.containRole(Role.ADMINISTRATOR)) {%>
                 <li>
-                    <a href="<%=request.getContextPath()%>/user"><i class="fa fa-users fa-fw"></i> Engineers <span class="fa arrow"></span></a>
+                    <a href="<%=request.getContextPath()%>/user"><i class="fa fa-users fa-fw"></i> Users <span class="fa arrow"></span></a>
                 </li>
                 <li>
                     <a href="<%=request.getContextPath()%>/job"><i class="fa fa-wrench fa-fw"></i> Jobs <span class="fa arrow"></span></a>
