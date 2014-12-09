@@ -34,18 +34,18 @@ public class Priority {
         switch (id) {
             case 1: return "#FF0000";
             case 2: return "#FF8C00";
-            case 3: return "#98FB98";
-            case 4: return "#87CEFA";
+            case 3: return "#87CEFA";
+            case 4: return "#98FB98";
         }
         return "";
     }
 
     public String getIcon() {
         switch (id) {
-            case 1: return "fa-bolt";
-            case 2: return "fa-plus-square";
-            case 3: return "fa-plus-square-o";
-            case 4: return "fa-square-o";
+            case 1: return "fa-angle-double-up";
+            case 2: return "fa-angle-up";
+            case 3: return "fa-angle-down";
+            case 4: return "fa-angle-double-down";
         }
         return "";
     }
