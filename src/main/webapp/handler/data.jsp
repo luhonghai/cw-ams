@@ -17,7 +17,7 @@
   AbstractService service = null;
   Gson gson = new Gson();
   PrintWriter writer  = response.getWriter();
-
+  User currentUser = UserService.getCurrentUser(session);
   if (target == null || target.length() == 0 || type == null || type.length() == 0) {
     TableData tData = new TableData();
     tData.setMessage("Wrong parameter. Target: " + target + ". Type: " + type);
@@ -104,8 +104,9 @@
           user = (User) service.create(user);
           tableData.setObject(user);
         } else if (type.equalsIgnoreCase("update")) {
-          if (option != null && option.length() > 0 && option.equalsIgnoreCase(AbstractService.OPTION_PROFILE)) {
-            service.setOption(option);
+          if ((option != null && option.length() > 0 && option.equalsIgnoreCase(AbstractService.OPTION_PROFILE))
+               ||  user.getUsername().equalsIgnoreCase(currentUser.getUsername()) ) {
+            service.setOption(AbstractService.OPTION_PROFILE);
             user = (User) service.update(user);
             session.setAttribute("user", user);
           } else {

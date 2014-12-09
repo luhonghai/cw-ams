@@ -18,4 +18,5 @@ from (((job as j left join qualification as q on j.qualification_id = q.qualific
 where q.deleted = false and j.deleted = false and js.deleted = false
       and p.deleted = false) as t on t.job_id = ej.job_id)
   WHERE ej.deleted=FALSE and e.deleted=FALSE and u.deleted=FALSE and e.user_id = ?
+        and t.status_id <> 1
   ORDER BY t.priority_level DESC , t.job_status_level DESC;

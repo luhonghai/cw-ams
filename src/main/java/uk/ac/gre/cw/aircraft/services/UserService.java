@@ -209,12 +209,14 @@ public class UserService extends AbstractService<User> {
             Collection<MappingData.Mapping> mappings = new ArrayList<MappingData.Mapping>();
             if (users != null && users.size() > 0) {
                 for (User user : users) {
-                    if (data != null && data.isContainMapping(user.getId())) {
-                        mappings.add(new MappingData.Mapping(user.getId(),
-                                user.getFirstName() + " " + user.getLastName() + " (" + user.getUsername() + ")", true));
-                    } else {
-                        mappings.add(new MappingData.Mapping(user.getId(),
-                                user.getFirstName() + " " + user.getLastName() + " (" + user.getUsername() + ")", false));
+                    if (user.containRole(Role.ENGINEER)) {
+                        if (data != null && data.isContainMapping(user.getId())) {
+                            mappings.add(new MappingData.Mapping(user.getId(),
+                                    user.getFirstName() + " " + user.getLastName() + " (" + user.getUsername() + ")", true));
+                        } else {
+                            mappings.add(new MappingData.Mapping(user.getId(),
+                                    user.getFirstName() + " " + user.getLastName() + " (" + user.getUsername() + ")", false));
+                        }
                     }
                 }
             }
@@ -264,12 +266,14 @@ public class UserService extends AbstractService<User> {
             Collection<MappingData.Mapping> mappings = new ArrayList<MappingData.Mapping>();
             if (users != null && users.size() > 0) {
                 for (User user : users) {
-                    if (data != null && data.isContainMapping(user.getId()) && user.containRole(Role.ENGINEER)) {
-                        mappings.add(new MappingData.Mapping(user.getId(),
-                                user.getFirstName() + " " + user.getLastName() + " (" + user.getUsername() + ")", true));
-                    } else {
-                        mappings.add(new MappingData.Mapping(user.getId(),
-                                user.getFirstName() + " " + user.getLastName() + " (" + user.getUsername() + ")", false));
+                    if (user.containRole(Role.ENGINEER)) {
+                        if (data != null && data.isContainMapping(user.getId())) {
+                            mappings.add(new MappingData.Mapping(user.getId(),
+                                    user.getFirstName() + " " + user.getLastName() + " (" + user.getUsername() + ")", true));
+                        } else {
+                            mappings.add(new MappingData.Mapping(user.getId(),
+                                    user.getFirstName() + " " + user.getLastName() + " (" + user.getUsername() + ")", false));
+                        }
                     }
                 }
             }
